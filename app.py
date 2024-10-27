@@ -12,13 +12,6 @@ def main():
         image= Image.open(uploaded_file)
         st.image(image, caption='Uploaded Image', use_column_width=True)
         
-    # Make prediction
-    if st.button('Analyze Image'):
-        with st.spinner('Analyzing...'):
-            
-            
-             # Display results
-                st.success(f"Disease Detected: {'disease'}")
-                st.info(f"Confidence: {'confidence':.2%}")
+
 if __name__ == '__main__':
     main()

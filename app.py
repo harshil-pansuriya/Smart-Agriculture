@@ -4,6 +4,7 @@ import json
 import tensorflow as tf
 from utils.preprocessor import preprocess_image
 from utils.disease_info import DISEASE_INFO
+import os
 
 def load_model_classes():
     # Load the trained model and class indices
@@ -14,7 +15,7 @@ def load_model_classes():
     class_names={ v: k for k , v in class_indices.items()}
     return model ,class_names
     
-def predict_disease(image,model,class_names):
+def predict_disease(image,model,class_names,confidence_threshold=0.7):
     # predict disease from image
     processed_image=preprocess_image(image)
     prediction=model.predict(processed_image)
@@ -23,6 +24,10 @@ def predict_disease(image,model,class_names):
     predicted_class = class_names[predicted_class_index]  # Get the class name
     confidence = float(prediction[0][predicted_class_index])  # Get the confidence score
     
+    if confidence < confidence_threshold:
+        return "Unknown", confidence
+    
+    predicted_class = class_names[predicted_class_index]
     return predicted_class, confidence
 
 def main():

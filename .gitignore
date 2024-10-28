@@ -164,3 +164,9 @@ cython_debug/
 
 # folders
 PlantVillage/
+data/
+
+
+#files
+extra.py
+ex.py
